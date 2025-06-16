@@ -1,0 +1,247 @@
+/* static/css/style.css - Refined Classic Design */
+
+/* --- Color Palette --- */
+:root {
+    --color-background-primary: #f8f8f0; /* Soft cream/off-white */
+    --color-background-secondary: #e6e6dc; /* Slightly darker background texture */
+    --color-card-background: #ffffff; /* Pure white for cards */
+    --color-text-dark: #3a3a3a; /* Deep charcoal */
+    --color-text-medium: #6a6a6a; /* Muted gray */
+    --color-accent-gold: #b8860b; /* DarkGoldenRod */
+    --color-accent-green: #4CAF50; /* A pleasant green for success */
+    --color-accent-red: #D32F2F; /* A strong red for danger */
+    --color-border-light: #d0d0c0; /* Light gray-brown border */
+    --color-border-dark: #a0a090; /* Darker gray-brown border */
+    --color-button-start: #81985F; /* Muted green for button top */
+    --color-button-end: #5A6B41;   /* Darker muted green for button bottom */
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: 'Lora', serif; /* A classic, readable serif font for body */
+    background: var(--color-background-primary);
+    color: var(--color-text-dark);
+    line-height: 1.7;
+    margin: 0;
+    padding: 40px 0; /* More top/bottom padding for breathing room */
+    /* Subtle background texture */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2Q3ZDdkNyIgZmlsbC1vcGFjaXR5PSIwLjA3Ij48cGF0aCBkPSJNMCA0MGwxMi04VjBoLTZMNCA2LjcxIDAgMTBoMi4wMWwxLjA1IDItMS42Ni0zLjY2LTMuNjYgMS42NSAxLjc0IDMuODMtMS43NCAzLjg0LTMuNjYtMS42NiAyLjQ2LDUuNDUtMS4wMyAyLjI3IDIuMzEtMS4wNCAxLjQ1IDMuNzQtLjczIDEuNzEtLjcxIDEuNy0xLjA0IDIuMzEtLjczIDEuNzMtLjcyIDEuNzItMS4wMyAyLjI4LjUxIDEuMTQgMjMuNTIgMTIuNDkgMC0xMi40OS02IDAtNiAxMi40OS02IDAtNi0xMi40OS01Ljk5IDAgLjc0IDEuNiAxLjM2LTMuMDEgNC42MyA0LjQ1IDcuMTQtNS40NCAwIDAtOS44OS03Ljk5LTMuNzcgMC00LjI5IDEuNDMtNC4yOC0xLjQzIDAtMi44Ni00LjI5IDAtNC4yOCAxLjQzLTQuMjggMS40My00LjI5IDAtNC4yOC0xLjQzLTYgMC02LTQuMjktNC4yOC0xLjQzLTQuMjkgMS40My00LjI4IDEtNC4yOC0xLjc3LTQuMjktMS40My02IDAtNi00LjI5LTQuMjggMC00LjI4LTEuNDMtNC4yOSAxLjQzLTQuMjggMC00LjI4IDEuNDMtNC4yOCAxLjQzLTQuMjktMS40My00LjI4IDAtNiAwLTYtNC4yOS00LjI4LTQuMjgtMS40My02IDAtNi00LjI5LTQuMjggMC00LjI4LTEuNDMtNC4yOSAxLjQzLTQuMjggMS40My00LjI5LTEuNDMtNC4yOCAwLTYtNi00LjI5LTQuMjgtMS40My02IDAtNi00LjI5LTQuMjggMC00LjI4LTEuNDMtNC4yOSAxLjQzLTQuMjggMS40My00LjI5LTEuNDMtNC4yOCAwLTYtNi00LjI5LTQuMjgtMS40My02LTQuMjktNi00LjI4IDAtNi0xLjQzLTQuMjktNC4yOC0xLjQzLTQuMjktMS40My02IDAtNi00LjI5LTQuMjggMC00LjI4LTEuNDMtNC4yOSAxLjQzLTQuMjggMS40My00LjI5LTEuNDMtNC4yOCAwLTYtNi00LjI5LTQuMjgtMS40My02LTQuMjktNi00LjI4IDAtNi0xLjQzLTQuMjktNC4yOC0xLjQzLTQuMjgtNi00LjI5LTEuNDMtNC4yOC0xLjQzLTYtNC4yOS0xLjQzLTYtMS40My00LjI5LTQuMjgtMS40My00LjI5LTQuMjgtNi00LjI5LTQuMjgtMS40My00LjI5LTQuMjgtNi00LjI5LTQuMjgtMS40My00LjI5LTYtNC4yOC0xLjQzLTQuMjktNC4yOC0xLjQzLTYtNC4yOS0xLjQzLTYtNC4yOC0xLjQzLTYtNi00LjI4LTQuMjktMS40My02LTQuMjktNC4yOC0xLjQzLTYtNC4yOS00LjI4LTYtNC4yOS00LjI4LTQuMjgtMS40My00LjI5LTYtNC4yOC0xLjQzLTYtNC4yOS0xLjQzLTQuMjktNC4yOC00LjI5LTYtNC4yOC00LjI5LTEuNDMtNi00LjI4LTYtNC4yOS0xLjQzLTYtNC4yOC0xLjQzLTQuMjktNC4yOC02LTQuMjktNC4yOC0xLjQzLTQuMjktNC4yOC02LTQuMjktNC4yOC0xLjQzLTYtNC4yOS00LjI4LTQuMjgtNi00LjI5LTQuMjgtNi00LjI5LTQuMjgtNi00LjI4LTQuMjktNi00LjI5LTQuMjgtNi00LjI5LTQuMjgtNi00LjI4LTQuMjktNi00LjI5LTQuMjgtNi00LjI5LTQuMjgtNi00LjI4LTYtNC4yOS00LjI5LTQuMjgtNC4yOS02LTQuMjktNi00LjI5LTQuMjgtNi00LjI5LTYtNC4yOC00LjI5LTYtNC4yOS02LTQuMjktNC4yOS02LTQuMjktNi00LjI5LTQuMjktNi02LTQuMjktNi00LjI5LTQtNi00LjI5LTYtNC4yOS02LTRMLTE4IDMybDM2IDQ4LTE4IDI4LTMyLTM4IDAgMThoMjh2LTE4bC0yMCAxMHoiLz48L2c+PC9zdmc+');
+    background-size: 40px 40px;
+}
+
+.app-container {
+    max-width: 960px; /* Standard Bootstrap container width */
+    margin: 0 auto;
+    padding: 30px; /* More padding inside the container */
+}
+
+/* --- Header Styles --- */
+.app-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-light);
+    position: relative;
+}
+
+.app-header::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -1px; /* Position it on top of the border */
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-accent-gold); /* Gold line under header */
+    border-radius: 2px;
+}
+
+.app-title {
+    font-family: 'Playfair Display', serif; /* Elegant serif for title */
+    font-size: 3.2em; /* Larger title */
+    font-weight: 700; /* Bold */
+    color: var(--color-text-dark);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+}
+
+.app-tagline {
+    font-family: 'Lora', serif;
+    font-size: 1.1em;
+    color: var(--color-text-medium);
+    font-style: italic;
+    margin-top: -10px; /* Pull it closer to the title */
+}
+
+/* --- Main Card Styles --- */
+.card.app-card {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border-dark);
+    border-radius: 10px; /* Slightly more rounded */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* More pronounced shadow */
+    padding: 40px; /* More internal padding */
+    position: relative;
+    overflow: hidden; /* Ensures any internal shadows are clipped */
+}
+
+/* --- Section Heading Styles --- */
+.section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--color-border-light); /* Dashed line for classic feel */
+}
+
+/* --- Form Element Styling --- */
+label {
+    font-weight: 700; /* Bolder labels */
+    color: var(--color-text-medium);
+    margin-bottom: 8px; /* More space below labels */
+    display: block;
+    font-size: 0.95em;
+}
+
+.form-control {
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px; /* Slightly rounded for softness */
+    padding: 10px 15px; /* More padding inside inputs */
+    background-color: #fcfcfc; /* Off-white background for inputs */
+    color: var(--color-text-dark);
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.06); /* Subtle inner shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for focus */
+}
+
+.form-control:focus {
+    border-color: var(--color-accent-gold); /* Gold border on focus */
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.06), 0 0 8px rgba(184, 134, 11, 0.3); /* Gold outer glow */
+    background-color: #ffffff; /* White on focus */
+    outline: none;
+}
+
+/* --- Button Styling --- */
+.btn-predict {
+    display: block; /* Make button take full width */
+    width: 100%;
+    padding: 15px 25px; /* Larger padding for button */
+    font-size: 1.3em; /* Larger font size */
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(to bottom, var(--color-button-start), var(--color-button-end));
+    border: 1px solid #4a5c32; /* Darker border */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-predict:hover {
+    background: linear-gradient(to top, var(--color-button-start), var(--color-button-end)); /* Invert gradient on hover */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.btn-predict:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- Prediction Result Display --- */
+.prediction-result {
+    padding: 30px;
+    border: 2px solid;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.prediction-result h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.prediction-result .lead {
+    font-family: 'Lora', serif;
+    font-size: 2.2em; /* Larger for impact */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.confidence-text { /* New class for confidence text */
+    font-size: 1.1em;
+    color: var(--color-text-medium);
+    margin-top: 15px;
+    font-style: italic;
+}
+
+.result-success {
+    border-color: var(--color-accent-green);
+    color: #2e7d32; /* Darker green for text */
+    background-color: #e8f5e9; /* Very light green */
+}
+
+.result-danger {
+    border-color: var(--color-accent-red);
+    color: #c62828; /* Darker red for text */
+    background-color: #ffebee; /* Very light red */
+}
+
+/* --- Footer and Disclaimer --- */
+.app-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-light);
+    color: var(--color-text-medium);
+    font-size: 0.9em;
+}
+
+.disclaimer {
+    font-style: italic;
+    margin-bottom: 10px;
+    color: var(--color-text-medium);
+}
+
+.copyright {
+    color: var(--color-text-medium);
+}
+
+/* --- Responsive Adjustments (Bootstrap handles most grid responsiveness) --- */
+@media (max-width: 768px) {
+    .app-title {
+        font-size: 2.5em;
+    }
+    .app-card {
+        padding: 30px;
+    }
+    .section-heading {
+        font-size: 1.6em;
+    }
+    .btn-predict {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .app-title {
+        font-size: 2em;
+    }
+    .app-tagline {
+        font-size: 0.9em;
+    }
+    .app-card {
+        padding: 20px;
+    }
+    .section-heading {
+        font-size: 1.4em;
+    }
+    .prediction-result .lead {
+        font-size: 1.6em;
+    }
+}

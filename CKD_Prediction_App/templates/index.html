@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKD Prediction App - Refined Classic</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container app-container">
+        <header class="app-header">
+            <h1 class="text-center app-title">Chronic Kidney Disease Prediction</h1>
+            <p class="app-tagline">Leveraging Machine Learning for Early Insights</p>
+        </header>
+
+        <main class="main-content">
+            <div class="card app-card">
+                <form action="{{ url_for('predict') }}" method="post">
+                    <h5 class="section-heading">Patient Information</h5>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="age">Age:</label>
+                            <input type="number" step="1" min="1" max="120" class="form-control" id="age" name="age" placeholder="e.g., 45" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="blood_pressure">Blood Pressure (mm/Hg):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="blood_pressure" name="blood_pressure" placeholder="e.g., 80" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="specific_gravity">Specific Gravity:</label>
+                            <input type="number" step="0.001" min="1.000" max="1.030" class="form-control" id="specific_gravity" name="specific_gravity" placeholder="e.g., 1.020" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="albumin">Albumin:</label>
+                            <input type="number" step="any" min="0" class="form-control" id="albumin" name="albumin" placeholder="e.g., 1" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sugar">Sugar:</label>
+                            <input type="number" step="any" min="0" class="form-control" id="sugar" name="sugar" placeholder="e.g., 0" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="blood_glucose_random">Blood Glucose Random (mgs/dl):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="blood_glucose_random" name="blood_glucose_random" placeholder="e.g., 120" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="blood_urea">Blood Urea (mgs/dl):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="blood_urea" name="blood_urea" placeholder="e.g., 30" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="serum_creatinine">Serum Creatinine (mgs/dl):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="serum_creatinine" name="serum_creatinine" placeholder="e.g., 1.2" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sodium">Sodium (mEq/L):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="sodium" name="sodium" placeholder="e.g., 135" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="potassium">Potassium (mEq/L):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="potassium" name="potassium" placeholder="e.g., 4.0" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="hemoglobin">Hemoglobin (gms):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="hemoglobin" name="hemoglobin" placeholder="e.g., 13.0" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="packed_cell_volume">Packed Cell Volume:</label>
+                            <input type="number" step="any" min="0" class="form-control" id="packed_cell_volume" name="packed_cell_volume" placeholder="e.g., 40" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="white_blood_cell_count">White Blood Cell Count (cells/cmm):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="white_blood_cell_count" name="white_blood_cell_count" placeholder="e.g., 7500" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="red_blood_cell_count">Red Blood Cell Count (millions/cmm):</label>
+                            <input type="number" step="any" min="0" class="form-control" id="red_blood_cell_count" name="red_blood_cell_count" placeholder="e.g., 4.5" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="red_blood_cells">Red Blood Cells:</label>
+                            <select class="form-control" id="red_blood_cells" name="red_blood_cells" required>
+                                <option value="normal">Normal</option>
+                                <option value="abnormal">Abnormal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="pus_cell">Pus Cell:</label>
+                            <select class="form-control" id="pus_cell" name="pus_cell" required>
+                                <option value="normal">Normal</option>
+                                <option value="abnormal">Abnormal</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pus_cell_clumps">Pus Cell Clumps:</label>
+                            <select class="form-control" id="pus_cell_clumps" name="pus_cell_clumps" required>
+                                <option value="notpresent">Not Present</option>
+                                <option value="present">Present</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="bacteria">Bacteria:</label>
+                            <select class="form-control" id="bacteria" name="bacteria" required>
+                                <option value="notpresent">Not Present</option>
+                                <option value="present">Present</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="hypertension">Hypertension:</label>
+                            <select class="form-control" id="hypertension" name="hypertension" required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="diabetes_mellitus">Diabetes Mellitus:</label>
+                            <select class="form-control" id="diabetes_mellitus" name="diabetes_mellitus" required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="coronary_artery_disease">Coronary Artery Disease:</label>
+                            <select class="form-control" id="coronary_artery_disease" name="coronary_artery_disease" required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="appetite">Appetite:</label>
+                            <select class="form-control" id="appetite" name="appetite" required>
+                                <option value="good">Good</option>
+                                <option value="poor">Poor</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pedal_edema">Pedal Edema:</label>
+                            <select class="form-control" id="pedal_edema" name="pedal_edema" required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="anemia">Anemia:</label>
+                            <select class="form-control" id="anemia" name="anemia" required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-predict mt-4">Get Prediction</button>
+                </form>
+
+                {% if prediction_text %}
+                    <div class="prediction-result mt-4
+                        {% if 'No Chronic Kidney Disease' in prediction_text %}
+                            result-success
+                        {% else %}
+                            result-danger
+                        {% endif %}">
+                        <h4 class="mb-1">Prediction Result:</h4>
+                        <p class="lead mb-0">{{ prediction_text }}</p>
+                        {% if confidence %}
+                            <p class="confidence-text">Confidence: {{ confidence }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p class="disclaimer">
+                Disclaimer: This application is for educational and demonstrative purposes only and should not be used for medical diagnosis.
+            </p>
+            <p class="copyright">&copy; 2025 CKD Prediction App. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
