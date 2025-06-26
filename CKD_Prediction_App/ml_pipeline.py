@@ -1,6 +1,3 @@
-# ml_pipeline.py
-
-# --- Import Libraries ---
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,8 +11,7 @@ import os
 
 print("--- Starting ML Pipeline: Data Loading, EDA, Cleaning, Training ---")
 
-# --- 1. Load the Dataset ---
-# ENSURE YOUR DATASET IS NAMED 'chronickidneydisease.csv' AND IS IN 'dataset/' FOLDER
+# Loading the Dataset
 dataset_path = 'dataset/chronickidneydisease.csv'
 try:
     df = pd.read_csv(dataset_path)
@@ -29,24 +25,19 @@ except Exception as e:
     print(f"An error occurred while reading the dataset: {e}")
     exit()
 
-# --- Initial Data Cleaning & Column Renaming ---
-# 1. Replace '?' with NaN globally
+# data preprocessing
 df.replace('?', np.nan, inplace=True)
 print("Replaced '?' with NaN across the dataset.")
 
-# 2. Drop 'id' column if it exists
 if 'id' in df.columns:
     df.drop('id', axis=1, inplace=True)
     print("Column 'id' dropped.")
 else:
     print("Column 'id' not found (already removed or not present).")
 
-# 3. Standardize column names (strip whitespace and lowercase)
 df.columns = df.columns.str.strip().str.lower()
 print("Columns stripped and lowercased.")
 
-# 4. Apply a consistent renaming mapping for clarity and app compatibility
-# This map is based on common dataset column names and what the app expects
 new_column_names = {
     'age': 'age', 'bp': 'blood_pressure', 'sg': 'specific_gravity',
     'al': 'albumin', 'su': 'sugar', 'rbc': 'red_blood_cells',
@@ -57,13 +48,13 @@ new_column_names = {
     'wc': 'white_blood_cell_count', 'rc': 'red_blood_cell_count',
     'htn': 'hypertension', 'dm': 'diabetes_mellitus',
     'cad': 'coronary_artery_disease', 'appet': 'appetite',
-    'pe': 'pedal_edema', 'ane': 'anemia', 'classification': 'class' # 'classification' is the common target name
+    'pe': 'pedal_edema', 'ane': 'anemia', 'classification': 'class' 
 }
 df.rename(columns={k: v for k, v in new_column_names.items() if k in df.columns and k != v}, inplace=True)
 print("Columns renamed based on standard mapping for readability and app compatibility.")
 
 
-# --- 2. Understand the Data & Data Types/Structure (Post Initial Cleaning) ---
+
 print("\n--- Cleaned Data Head (first 5 rows) ---")
 print(df.head())
 

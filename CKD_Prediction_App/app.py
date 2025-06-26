@@ -1,4 +1,4 @@
-# app.py
+
 
 import pandas as pd
 from flask import Flask, render_template, request
@@ -8,7 +8,7 @@ import os
 
 app = Flask(__name__)
 
-# --- Load the trained model and feature columns ---
+# Loading the trained model and feature columns
 model_path = 'CKD.pkl'
 features_path = 'model_features.pkl'
 
@@ -45,8 +45,7 @@ def predict():
     """Handles prediction requests from the web form."""
     if request.method == 'POST':
         try:
-            # --- 1. Collect raw input data from the form ---
-            # Numerical inputs
+            #  Collecting inputs
             age = float(request.form['age'])
             blood_pressure = float(request.form['blood_pressure'])
             specific_gravity = float(request.form['specific_gravity'])
@@ -62,7 +61,6 @@ def predict():
             white_blood_cell_count = float(request.form['white_blood_cell_count'])
             red_blood_cell_count = float(request.form['red_blood_cell_count'])
 
-            # Categorical inputs (from select dropdowns)
             red_blood_cells = request.form['red_blood_cells']
             pus_cell = request.form['pus_cell']
             pus_cell_clumps = request.form['pus_cell_clumps']
@@ -74,9 +72,8 @@ def predict():
             pedal_edema = request.form['pedal_edema']
             anemia = request.form['anemia']
 
-            # --- 2. Prepare input data for the model (one-hot encoding) ---
-            # Create a dictionary with all expected features, initialized to 0.
-            # This handles features that are one-hot encoded but not selected in the form.
+            #Preparing input data for the model
+            
             processed_input = {feature: 0 for feature in model_features}
 
             # Populate numerical features
@@ -117,18 +114,18 @@ def predict():
             if anemia == 'yes' and 'anemia_yes' in processed_input:
                 processed_input['anemia_yes'] = 1
 
-            # Create a Pandas DataFrame from the processed input, ensuring correct feature order
+            
             input_df = pd.DataFrame([processed_input])
             input_df = input_df.reindex(columns=model_features, fill_value=0)
 
-            # --- 3. Make Prediction ---
+            # Making Prediction
             prediction = model.predict(input_df)[0]
             prediction_proba = model.predict_proba(input_df)[0]
 
             result_text = "Chronic Kidney Disease" if prediction == 1 else "No Chronic Kidney Disease"
             confidence = f"{prediction_proba[prediction]*100:.2f}%"
 
-            # --- 4. Render template with results ---
+            # Rendering template with results
             return render_template('index.html', prediction_text=result_text, confidence=confidence)
 
         except ValueError as e:
